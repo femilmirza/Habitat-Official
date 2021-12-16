@@ -9,6 +9,7 @@ html {
   height: 100%;
   width: 100%;
   background-color: #000;
+  user-select: none;
 }
 #__next {
   height: 100%;
@@ -32,7 +33,7 @@ html {
 }
 @media screen and (min-width: 300px) {
   * {
-    font-size: 10px;
+    font-size: 12px;
   }
 }
 @media screen and (min-width: 600px) {
