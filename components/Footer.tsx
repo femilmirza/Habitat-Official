@@ -3,7 +3,7 @@ const Footer: React.FC = () => {
     <div className="flex flex-col">
       <div className="flex flex-row w-full items-center justify-between px-8">
         <div className="text-white font-orbitron text-4xl">H</div>
-        <div className="flex flex-row items-center justify-around">
+        <div className="flex flex-row items-center justify-around gap-1">
           <svg
             width="38"
             height="38"
@@ -52,7 +52,7 @@ const Footer: React.FC = () => {
       </div>
       <div className="mx-8 h-[1px] bg-gradient-to-r from-pri to-sec ..."></div>
       <h6 className="text-white text-xs mt-2 font-poppins text-center">
-        designed by femil mirza
+        designed by femil mirza | developed by lucidmach
       </h6>
     </div>
   );
