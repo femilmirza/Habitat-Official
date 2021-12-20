@@ -1,20 +1,39 @@
 import { useState, useEffect } from "react";
+import { collection, setDoc, getDoc, doc } from "firebase/firestore";
+import { auth, db } from "../firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+
+const getUserStatus = async (userEmailID: string) => {
+  const docRef = doc(db, "status", userEmailID);
+  const snapshot = await getDoc(docRef);
+  if (snapshot.exists()) return snapshot.data();
+  return null;
+};
+
+const setUserStatus = async (userEmailId: string, data: boolean[]) => {
+  await setDoc(doc(db, "status", userEmailId), { data });
+};
 
 const Streak: React.FC = () => {
   const [status, setStatus] = useState<boolean[]>(new Array(56).fill(false));
+  const [user] = useAuthState(auth);
 
   useEffect(() => {
-    const history = window.localStorage.getItem("status");
+    // if (user) {
+    //   getUserStatus(user.email).then((data) => setStatus(data.data));
+    // }
 
-    if (history) {
-      const prevStatus = JSON.parse(history);
+    const snapshot = window.localStorage.getItem("status");
+    if (snapshot) {
+      const prevStatus = JSON.parse(snapshot);
       setStatus(prevStatus);
     }
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     window.localStorage.setItem("status", JSON.stringify(status));
-  }, [status]);
+    // if (user) setUserStatus(user.email, status);
+  }, [status, user]);
 
   const handleClick = (day: number) => {
     const newStatus = [...status];
@@ -42,7 +61,7 @@ const Streak: React.FC = () => {
         })}
       </div>
       <button
-        className="border-2 border-sec rounded-lg flex justify-center sm:hover:bg-sec"
+        className="hover:border-2 w-10 h-10 items-center self-end hover:border-sec rounded-lg flex justify-center"
         onClick={handleBtn}
       >
         <svg
