@@ -16,24 +16,31 @@ const setUserStatus = async (userEmailId: string, data: boolean[]) => {
 
 const Streak: React.FC = () => {
   const [status, setStatus] = useState<boolean[]>(new Array(56).fill(false));
-  const [user] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
 
   useEffect(() => {
-    // if (user) {
-    //   getUserStatus(user.email).then((data) => setStatus(data.data));
-    // }
-
-    const snapshot = window.localStorage.getItem("status");
-    if (snapshot) {
-      const prevStatus = JSON.parse(snapshot);
-      setStatus(prevStatus);
+    if (!loading) {
+      if (!user) {
+        const snapshot = window.localStorage.getItem("status");
+        if (snapshot) {
+          const prevStatus = JSON.parse(snapshot);
+          setStatus(prevStatus);
+        }
+      } else {
+        getUserStatus(user.email).then((data) => setStatus(data.data));
+      }
     }
-  }, [user]);
+  }, [user, loading]);
 
   useEffect(() => {
-    window.localStorage.setItem("status", JSON.stringify(status));
-    // if (user) setUserStatus(user.email, status);
-  }, [status, user]);
+    if (!loading) {
+      if (!user) {
+        window.localStorage.setItem("status", JSON.stringify(status));
+      } else {
+        if (user) setUserStatus(user.email, status);
+      }
+    }
+  }, [status]);
 
   const handleClick = (day: number) => {
     const newStatus = [...status];
