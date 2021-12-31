@@ -2,7 +2,28 @@ const Footer: React.FC = () => {
   return (
     <div className="flex flex-col">
       <div className="flex flex-row w-full items-center justify-between px-8">
-        <div className="text-white font-orbitron text-4xl">H</div>
+        <div className="text-white font-orbitron text-4xl">
+          <svg
+            width="24"
+            height="23"
+            viewBox="0 0 24 23"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect y="6.95703" width="3.61446" height="16.0432" fill="white" />
+            <rect x="5.49414" width="3.75904" height="23" fill="white" />
+            <rect x="10.9883" width="3.75904" height="23" fill="white" />
+            <rect x="20.2412" width="3.75904" height="23" fill="white" />
+            <line
+              x1="12.8672"
+              y1="18.8022"
+              x2="22.1202"
+              y2="18.8022"
+              stroke="white"
+              strokeWidth="3"
+            />
+          </svg>
+        </div>
         <div className="flex flex-row items-center justify-around gap-1">
           <a href="https://discord.gg/w3rJhwy9nr" target="_">
             <svg
@@ -63,7 +84,8 @@ const Footer: React.FC = () => {
       </div>
       <div className="mx-8 h-[1px] bg-gradient-to-r from-pri to-sec ..."></div>
       <h6 className="text-white text-xs mt-2 font-poppins text-center">
-        designed by femil mirza | developed by lucidmach
+        2022. Habitat Official | All rights Reserved | Terms of Use | privacy
+        Policy
       </h6>
     </div>
   );
